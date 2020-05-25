@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reccomandations_app/pages/home.dart';
-import 'package:reccomandations_app/pages/landing.dart';
-import 'package:reccomandations_app/pages/login.dart';
 
 final databaseReference = Firestore.instance;
 
@@ -17,15 +15,13 @@ class MyApp extends StatelessWidget {
       title: 'Codepro',
       theme: ThemeData(
         primaryColor: Color.fromRGBO(120, 140, 255, 1),
-        accentColor: Color.fromRGBO(255, 152, 0, 1),
+        accentColor: Color.fromRGBO(255, 179, 47, 1),
         fontFamily: "Oxygen",
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: '/home',
       routes: {
-        '/': (context) => Material(child: Landing()),
-        '/login': (context) => Material(child: Login()),
-        '/home': (context) => Material(child: HomeTopLevel()),
+        '/home': (context) => Material(child: Home()),
       },
     );
   }
