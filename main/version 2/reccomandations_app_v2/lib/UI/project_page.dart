@@ -47,7 +47,7 @@ class ProjectPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: horizontalPaddingSize, vertical: verticalPaddingSize),
+              padding: const EdgeInsets.only(left: horizontalPaddingSize, right: horizontalPaddingSize, top: verticalPaddingSize+5),
               child: Text(
                 "What the projet consists of:",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
@@ -84,7 +84,7 @@ class ProjectPage extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("This is a comment", style: TextStyle(fontSize: 18),),
+                    child: Text("This is a comment number ${index.toString()}", style: TextStyle(fontSize: 18),),
                   );
                 },
               ),
@@ -93,7 +93,7 @@ class ProjectPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => writeToFire(),
+        onPressed: () => null,
         child: Icon(Icons.comment),
       ),
     );

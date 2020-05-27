@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reccomandations_app_v2/UI/widget/project_card.dart';
+import 'package:reccomandations_app_v2/main.dart';
 import 'package:reccomandations_app_v2/models/project_template.dart';
 
 class Home extends StatefulWidget {
@@ -8,6 +9,46 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Project> projects = [];
+
+  Widget getProjects() {
+    // Widget currentWidget;
+    // projects.isEmpty
+    //     ? currentWidget = Container(
+    //         child: Center(
+    //           child: Text("Nothing to display"),
+    //         ),
+    //       )
+    //     : currentWidget = ListView.builder(
+    //         physics: const AlwaysScrollableScrollPhysics(),
+    //         itemCount: projects.length,
+    //         itemBuilder: (BuildContext context, int index) => ProjectCard(
+    //           project: projects[index],
+    //         ),
+    //       );
+    return ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: projects.length,
+        itemBuilder: (BuildContext context, int index) =>
+            ProjectCard(project: projects[index]));
+  }
+
+  Future<void> refresh() async {
+    var temp = (await databaseReference.collection("challenges").getDocuments())
+        .documents;
+
+    setState(() {
+      projects = temp.map<Project>(
+        (e) => Project.fromFirebase({
+          "difficulty": e.data["difficulty"],
+          "name": e.data["name"],
+          "description": e.data["description"],
+          "tags": e.data["tags"],
+        }),
+      ).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,20 +64,9 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         color: Colors.white10,
-        child: ListView.builder(
-          itemCount: 50,
-          itemBuilder: (BuildContext context, int index) {
-            return ProjectCard(
-              project: Project.fromFirebase(
-                {
-                  "name": "Test number ${index.toString()}",
-                  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                  "difficulty" : index % 5 < 1 ? "easy" : "medium",
-                  "tags": <String>["Social", "Test"]
-                },
-              ),
-            );
-          },
+        child: RefreshIndicator(
+          child: getProjects(),
+          onRefresh: refresh,
         ),
       ),
     );
