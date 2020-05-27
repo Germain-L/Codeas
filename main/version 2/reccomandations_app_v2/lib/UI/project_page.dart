@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reccomandations_app_v2/functions/parse.dart';
 import 'package:reccomandations_app_v2/models/project_template.dart';
 
 class ProjectPage extends StatelessWidget {
@@ -92,7 +93,7 @@ class ProjectPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => null,
+        onPressed: () => writeToFire(),
         child: Icon(Icons.comment),
       ),
     );
