@@ -3,6 +3,7 @@ class Project {
   String name;
   String description;
   List<dynamic> tags;
+  List<dynamic> comments;
 
   Project.fromFirebase(Map data) {
     difficulty = data["difficulty"];
