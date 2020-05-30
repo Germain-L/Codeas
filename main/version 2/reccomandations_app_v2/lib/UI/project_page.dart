@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reccomandations_app_v2/functions/parse.dart';
 import 'package:reccomandations_app_v2/models/project_template.dart';
 
 class ProjectPage extends StatelessWidget {
@@ -31,8 +30,12 @@ class ProjectPage extends StatelessWidget {
               padding: const EdgeInsets.only(right: 15.0),
               child: Text(
                 project.difficulty,
-                style: TextStyle(
-                    fontSize: 25, color: difficultyColor(project.difficulty)),
+                style: Theme.of(context).textTheme.bodyText1.merge(
+                      TextStyle(
+                        fontSize: 25,
+                        color: difficultyColor(project.difficulty),
+                      ),
+                    ),
               ),
             ),
           )
@@ -47,44 +50,65 @@ class ProjectPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: horizontalPaddingSize, right: horizontalPaddingSize, top: verticalPaddingSize+5),
+              padding: const EdgeInsets.only(
+                  left: horizontalPaddingSize,
+                  right: horizontalPaddingSize,
+                  top: verticalPaddingSize + 5),
               child: Text(
                 "What the projet consists of:",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyText1.merge(
+                    TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
               ),
             ),
             Divider(
               indent: 5,
               endIndent: 5,
-              color: Colors.black,
+              color: Theme.of(context).dividerColor,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: horizontalPaddingSize),
-
+              padding:
+                  const EdgeInsets.symmetric(horizontal: horizontalPaddingSize),
               child: Text(
                 project.description,
-                style: TextStyle(fontSize: 20),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .merge(TextStyle(fontSize: 20)),
               ),
             ),
             Divider(
               indent: 5,
               endIndent: 5,
-              color: Colors.black,
+              color: Theme.of(context).dividerColor,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("Comments:",style:TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
+              child: Text(
+                "Comments:",
+                style: Theme.of(context).textTheme.bodyText1.merge(
+                    TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
+              ),
             ),
             Expanded(
               child: ListView.separated(
                 separatorBuilder: (BuildContext context, int index) {
-                  return Divider(indent: 20, endIndent: 20,);
+                  return Divider(
+                    color: Theme.of(context).dividerColor,
+                    indent: 20,
+                    endIndent: 20,
+                  );
                 },
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("This is a comment number ${index.toString()}", style: TextStyle(fontSize: 18),),
+                    child: Text(
+                      "This is a comment number ${index.toString()}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .merge(TextStyle(fontSize: 18)),
+                    ),
                   );
                 },
               ),
