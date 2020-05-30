@@ -4,11 +4,13 @@ import 'package:reccomandations_app_v2/models/project_template.dart';
 
 
 
-Future<Map<String, List<Object>>> getProjects(List tags) async {
-  QuerySnapshot querySnapshot = await databaseReference.collection("challenges").getDocuments();
+Future<List<Project>> getProjects(List<String> tags) async {
 
+  //get docuements with projects from firebase
+  QuerySnapshot querySnapshot = await databaseReference.collection("challenges").getDocuments();
   List<DocumentSnapshot> projectsArrayAsMap = querySnapshot.documents;
 
+  // convert to custom dart objects<Project> and store in a List
   List<Project> projectsArray = projectsArrayAsMap.map<Project>((project) {
     return Project.fromFirebase({
       "difficulty": project["difficulty"],
@@ -18,6 +20,8 @@ Future<Map<String, List<Object>>> getProjects(List tags) async {
     });
   }).toList();
 
+
+  // add each project to a Map such as {"algebra" : [project]}
   Map<String, List> tagsMap = Map();
 
   for (Project project in projectsArray) {
@@ -29,8 +33,14 @@ Future<Map<String, List<Object>>> getProjects(List tags) async {
     }
   }
 
-  //TODO: return only list in tagsMap where tags is
 
-  print(tagsMap);
-  return tagsMap;
+  // create a List<Project> and add only wanted tags lists 
+  List<Project> projectsOnlyTagged = [];
+
+  for (String tag in tags) {
+    tagsMap[tag].forEach((element) => projectsOnlyTagged.add(element));
+  }
+
+
+  return projectsOnlyTagged;
 }
