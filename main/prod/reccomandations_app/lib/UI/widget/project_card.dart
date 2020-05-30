@@ -22,7 +22,6 @@ class ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       elevation: 1,
       child: InkWell(
         onTap: () => Navigator.of(context).push(
@@ -51,15 +50,26 @@ class ProjectCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(project.name, style: TextStyle(fontSize: 18)),
-                  Divider(),
+                  Text(project.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .merge(TextStyle(fontSize: 18))),
+                  Divider(
+                    color: Theme.of(context).dividerColor,
+                  ),
                   Text(
                     project.description,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 3,
-                    style: TextStyle(fontSize: 15),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .merge(TextStyle(fontSize: 15)),
                   ),
-                  Divider(),
+                  Divider(
+                    color: Theme.of(context).dividerColor,
+                  ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -69,8 +79,11 @@ class ProjectCard extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(color: Colors.black38)),
-                                child: Text(tag.toString()),
+                                    border: Border.all(
+                                        color: Theme.of(context).cursorColor)),
+                                child: Text(tag.toString(),
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1),
                               ))
                           .toList(),
                     ),
