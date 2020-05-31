@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/app/home.dart';
 import 'package:reccomandations_app/app/pages/splash_screen_login.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
           create: (context) => ProjectProvider()
         ),
         ChangeNotifierProvider(
-          create: (context) => LoginProvider()
+          create: (context) => LoginProvider(firebaseAuth: FirebaseAuth.instance, googleSignin: GoogleSignIn())
         ),
         ChangeNotifierProvider(
           create: (context) => NavigationProvider()

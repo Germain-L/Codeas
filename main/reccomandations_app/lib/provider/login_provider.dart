@@ -4,9 +4,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:reccomandations_app/models/user_repositer.dart';
 
 class LoginProvider with ChangeNotifier {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
 
+  LoginProvider({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
+      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+        _googleSignIn = googleSignin ?? GoogleSignIn();
   FirebaseUser user;
 
   Future<void> googleSignIn() async {
