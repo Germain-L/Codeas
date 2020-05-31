@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:reccomandations_app/provider/login_provider.dart';
 
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
     return Container(
       child: Center(
-        child: Text("Home page"),
+        child: Text(loginProvider.user.displayName),
       ),
     );
   }

@@ -26,7 +26,7 @@ class NavigationProvider with ChangeNotifier {
   }
 
   void removePageHistory() {
-    previousPages = [];
+    previousPages.clear();
     notifyListeners();
   }
 }

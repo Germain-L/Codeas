@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -23,13 +22,21 @@ class SignInMethodsPage extends StatelessWidget {
               onTap: () async {
                 await loginProvider.googleSignIn();
                 if (loginProvider.user != null) {
-                  navigationProvider.changePage("/home", "Home");
+                  navigationProvider.changePage("/home", "Home",);
+                  navigationProvider.removePageHistory();
                 }
               }
             ),
             LoginMethod(
-              text: "Create an account with email",
+              text: "Sign in with email",
               icon: Icon(MdiIcons.email),
+              onTap: () {
+                navigationProvider.changePage("/signInEmail", "Sign In with email");
+              },
+            ),
+            LoginMethod(
+              text: "Sign up with email",
+              icon: Icon(MdiIcons.emailPlus),
               onTap: () {
                 navigationProvider.changePage("/signUpEmail", "Sign up with email");
               },
