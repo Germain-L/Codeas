@@ -48,9 +48,7 @@ class MyApp extends StatelessWidget {
         title: 'Codeas',
         theme: ThemeData(
           canvasColor: Colors.white,
-          textTheme: GoogleFonts.openSansTextTheme(
-            Theme.of(context).textTheme,
-          )
+          fontFamily: "OpenSans"
         ),
         home: Scaffolding()
       ),

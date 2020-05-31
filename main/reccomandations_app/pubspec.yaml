@@ -33,5 +33,41 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  assets:
-   - google_fonts/
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: OpenSans/OpenSans-Bold.ttf
+          weight: 700
+
+        - asset: OpenSans/OpenSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+
+        - asset: OpenSans/OpenSans-ExtraBold.ttf
+          weight: 800
+
+        - asset: OpenSans/OpenSans-ExtraBold.ttf
+          weight: 800
+          style: italic
+
+        - asset: OpenSans/OpenSans-Italic.ttf
+          weight: 400
+          style: italic
+
+        - asset: OpenSans/OpenSans-Light.ttf
+          weight: 300
+
+        - asset: OpenSans/OpenSans-LightItalic.ttf
+          weight: 300
+          style: italic
+
+        - asset: OpenSans/OpenSans-LightItalic.ttf
+          weight: 400
+
+        - asset: OpenSans/OpenSans-SemiBold.ttf
+          weight: 600
+
+        - asset: OpenSans/OpenSans-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
