@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/app/home.dart';
-import 'package:reccomandations_app/app/pages/splash_screen_login.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';
 import 'package:reccomandations_app/provider/project_provider.dart';
@@ -48,11 +47,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Codeas',
         theme: ThemeData(
+          canvasColor: Colors.white,
           textTheme: GoogleFonts.openSansTextTheme(
             Theme.of(context).textTheme,
           )
         ),
-        home: SplashLoginPage()
+        home: Scaffolding()
       ),
     );
   }
