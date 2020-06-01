@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
@@ -32,7 +33,7 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
     password2 = TextEditingController();
   }
 
-  bool verify() {
+  bool isValid() {
     bool isEmailCorrect = false;
     bool isPasswordCorrect = false;
 
@@ -60,7 +61,6 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
       });
       return true;
     }
-
     return false;
   }
 
@@ -68,13 +68,14 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
       FocusNode currentNode, FocusNode nextNode) {
     bool autocorrect =
         name == "Email" || name == "Confirm email" ? false : true;
-      
+
     bool obscure = name == "Email" || name == "Confirm email" ? false : true;
     return TextFormField(
       decoration: InputDecoration(
         labelText: name,
         icon: icon,
       ),
+      autofocus: false,
       autocorrect: autocorrect,
       obscureText: obscure,
       controller: controller,
@@ -82,9 +83,7 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
       onFieldSubmitted: (String value) {
         print(value);
 
-        nextNode != null
-            ? FocusScope.of(context).requestFocus(nextNode)
-            : FocusScope.of(context).unfocus();
+        FocusScope.of(context).requestFocus(nextNode);
       },
     );
   }
@@ -95,13 +94,17 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
     final loginProvider = Provider.of<LoginProvider>(context);
     final navigationProvider = Provider.of<NavigationProvider>(context);
     return Container(
+      color: Theme.of(context).canvasColor,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AnimatedOpacity(
             duration: Duration(milliseconds: 350),
-            child: Text(errorText),
+            child: Text(
+              errorText,
+              style: TextStyle(color: Colors.redAccent),
+            ),
             opacity: opacity,
           ),
           inputBox(
@@ -110,14 +113,56 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
               email2Node, password1Node),
           inputBox("Password", Icon(MdiIcons.lock), password1, password1Node,
               password2Node),
-          inputBox("Confirm password", Icon(Icons.lock_outline), password2,
-              password2Node, null),
-          FlatButton(
-            child: Text("Submit"),
-            onPressed: () {
-              verify();
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Confirm password",
+              icon: Icon(Icons.lock_outline),
+            ),
+            autocorrect: false,
+            obscureText: true,
+            controller: password2,
+            focusNode: password2Node,
+            onFieldSubmitted: (String value) {
+              isValid();
             },
-          )
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FlatButton(
+                child: Text("Have an account ?"),
+                onPressed: () {
+                  navigationProvider.changePage(
+                      "/signInEmail", "Sign in with email");
+                },
+              ),
+              FlatButton(
+                child: Text("Submit"),
+                onPressed: () async  {
+
+                  if (isValid()) {
+                    Map returnedValue = await loginProvider.emailSignUp(email1.text, password1.text);
+                    if (!returnedValue["success"]) {
+                      setState(() {
+                        errorText = returnedValue["exception"].message;
+                        opacity = 1;
+                      });
+                    } else if (returnedValue["success"]) {
+                      Fluttertoast.showToast(msg: "Accont creation successful");
+                      navigationProvider.changePage(
+                      "/signInEmail", "Sign in with email");
+                      navigationProvider.removePageHistory();
+                    }
+                  } else {
+                    setState(() {
+                      errorText = "Something failed";
+                      opacity = 1;
+                    });
+                  }
+                },
+              )
+            ],
+          ),
         ],
       ),
     );

@@ -31,7 +31,7 @@ class SignInMethodsPage extends StatelessWidget {
               text: "Sign in with email",
               icon: Icon(MdiIcons.email),
               onTap: () {
-                navigationProvider.changePage("/signInEmail", "Sign In with email");
+                navigationProvider.changePage("/signInEmail", "Sign in with email");
               },
             ),
             LoginMethod(
@@ -40,6 +40,12 @@ class SignInMethodsPage extends StatelessWidget {
               onTap: () {
                 navigationProvider.changePage("/signUpEmail", "Sign up with email");
               },
+            ),
+            SizedBox(height: 10,),
+            AnimatedOpacity(
+              opacity: loginProvider.loaderOpacity,
+              duration: Duration(milliseconds: 350),
+              child: CircularProgressIndicator(),
             )
           ],
         ),

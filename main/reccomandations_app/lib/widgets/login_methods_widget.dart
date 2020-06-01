@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 
 class LoginMethod extends StatelessWidget {
@@ -9,12 +8,19 @@ class LoginMethod extends StatelessWidget {
   LoginMethod({@required this.text, @required this.onTap, @required this.icon});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 5),
-      child: ListTile(
-        title: Text(text),
-        trailing: icon,
-        onTap: onTap,
+    return FlatButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10)
+      ),
+      color: Colors.white,
+      onPressed: onTap,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(text, style: Theme.of(context).textTheme.bodyText1,),
+          icon
+        ],
       ),
     );
   }

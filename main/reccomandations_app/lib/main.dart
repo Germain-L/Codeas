@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/app/home.dart';
@@ -26,6 +27,10 @@ import 'package:reccomandations_app/provider/project_provider.dart';
 Firestore databaseReference = Firestore.instance;
 
 void main() {
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('OpenSans/LICENSE.txt');
+    yield LicenseEntryWithLineBreaks(['OpenSans'], license);
+  });
   runApp(MyApp());
 }
 
@@ -47,8 +52,15 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Codeas',
         theme: ThemeData(
-          canvasColor: Colors.white,
-          fontFamily: "OpenSans"
+          canvasColor: Color.fromRGBO(255, 255, 255, 0.82),
+          appBarTheme: AppBarTheme(
+            color: Color.fromRGBO(255, 255, 255, 0.82)
+          ),
+          fontFamily: "OpenSans",
+
+          textTheme: TextTheme(
+            bodyText1: TextStyle(fontSize: 20)
+          )
         ),
         home: Scaffolding()
       ),

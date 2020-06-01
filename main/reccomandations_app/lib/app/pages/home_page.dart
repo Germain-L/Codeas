@@ -8,8 +8,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
     return Container(
+      color: Theme.of(context).canvasColor,
       child: Center(
-        child: Text(loginProvider.user.displayName),
+        child: Text(loginProvider.user.email),
       ),
     );
   }

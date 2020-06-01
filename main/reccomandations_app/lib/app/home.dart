@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/app/pages/account_page.dart';
@@ -30,7 +29,6 @@ class Scaffolding extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.white,
             title: Text(
               navigationProvider.currentPageTitle,
               style: TextStyle(
