@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Codeas',
         theme: ThemeData(
+          backgroundColor: Color.fromRGBO(255, 255, 255, 0.82),
           canvasColor: Color.fromRGBO(255, 255, 255, 0.82),
           appBarTheme: AppBarTheme(
             color: Color.fromRGBO(255, 255, 255, 0.82)
