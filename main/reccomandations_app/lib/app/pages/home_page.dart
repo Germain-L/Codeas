@@ -10,7 +10,14 @@ class HomePage extends StatelessWidget {
     final loginProvider = Provider.of<LoginProvider>(context);
     return Container(
       color: Theme.of(context).canvasColor,
-      child: AccountPage()
+      child: ListView.builder(
+        itemCount: 50,
+        itemBuilder: (BuildContext context, int index) => ListTile(
+          title: Text(
+            index.toString(),
+          ),
+        ),
+      ),
     );
   }
 }

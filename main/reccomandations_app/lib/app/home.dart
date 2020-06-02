@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/app/pages/about_page.dart';
 import 'package:reccomandations_app/app/pages/account_page.dart';
@@ -9,22 +8,23 @@ import 'package:reccomandations_app/app/pages/project_page.dart';
 import 'package:reccomandations_app/app/pages/sign_in_email_page.dart';
 import 'package:reccomandations_app/app/pages/sign_in_methods_page.dart';
 import 'package:reccomandations_app/app/pages/sign_up_email_page.dart';
+import 'package:reccomandations_app/main.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';
 import 'package:reccomandations_app/widgets/navbar.dart';
 
 class Scaffolding extends StatelessWidget {
   static Map<String, Widget> pages = {
-    "/account": AccountPage(),
-    "/home": HomePage(),
-    "/project": ProjectPage(),
-    "/signInEmail": SignInEmailPage(),
-    "/signInMethods": SignInMethodsPage(),
-    "/signUpEmail": SignUpEmailPage(),
-    "/about" : AboutPage(),
-    "/newProject": NewProjectPage(),
+    "/account": accountPage,
+    "/home": homePage,
+    "/project": projectPage,
+    "/signInEmail": signInEmailPage,
+    "/signInMethods": signInMethodsPage,
+    "/signUpEmail": signUpEmailPage,
+    "/about" : aboutPage,
+    "/newProject": newProjectPage,
   };
-
+  
   @override
   Widget build(BuildContext context) {
     final navigationProvider = Provider.of<NavigationProvider>(context);
@@ -54,3 +54,24 @@ class Scaffolding extends StatelessWidget {
     );
   }
 }
+
+
+// class Example extends StatelessWidget {
+//   static Map<String, Widget> pages = {
+//     "/account": AccountPage(),
+//     "/home": HomePage(),
+//     "/project": ProjectPage(),
+//     "/signInEmail": SignInEmailPage(),
+//     "/signInMethods": SignInMethodsPage(),
+//     "/signUpEmail": SignUpEmailPage(),
+//     "/about" : AboutPage(),
+//     "/newProject": NewProjectPage(),
+//   };
+//   @override
+//   Widget build(BuildContext context) {
+//     final navProvider = Provider.of<NavigationProvider>(context);
+//     return Scaffold(
+//       body: pages[navProvider.currentPage],
+//     );
+//   }
+// }

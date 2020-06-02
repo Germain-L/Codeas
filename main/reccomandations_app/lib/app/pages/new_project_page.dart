@@ -4,8 +4,14 @@ class NewProjectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Text("New project"),
+      color: Theme.of(context).canvasColor,
+      child: ListView.builder(
+        itemCount: 50,
+        itemBuilder: (BuildContext context, int index) => ListTile(
+          title: Text(
+            index.toString(),
+          ),
+        ),
       ),
     );
   }

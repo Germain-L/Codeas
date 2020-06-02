@@ -6,23 +6,28 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/app/home.dart';
+import 'package:reccomandations_app/app/pages/about_page.dart';
+import 'package:reccomandations_app/app/pages/account_page.dart';
+import 'package:reccomandations_app/app/pages/home_page.dart';
+import 'package:reccomandations_app/app/pages/new_project_page.dart';
+import 'package:reccomandations_app/app/pages/project_page.dart';
+import 'package:reccomandations_app/app/pages/sign_in_email_page.dart';
+import 'package:reccomandations_app/app/pages/sign_in_methods_page.dart';
+import 'package:reccomandations_app/app/pages/sign_up_email_page.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';
 import 'package:reccomandations_app/provider/project_provider.dart';
 
 
-// Font styles match:
-// {
-//   FontWeight.w100: 'Thin',
-//   FontWeight.w200: 'ExtraLight',
-//   FontWeight.w300: 'Light',
-//   FontWeight.w400: 'Regular',
-//   FontWeight.w500: 'Medium',
-//   FontWeight.w600: 'SemiBold',
-//   FontWeight.w700: 'Bold',
-//   FontWeight.w800: 'ExtraBold',
-//   FontWeight.w900: 'Black',
-// }
+
+AccountPage accountPage = AccountPage();
+HomePage homePage = HomePage();
+ProjectPage projectPage =   ProjectPage();
+SignInEmailPage signInEmailPage = SignInEmailPage();
+SignInMethodsPage signInMethodsPage = SignInMethodsPage();
+SignUpEmailPage signUpEmailPage = SignUpEmailPage();
+AboutPage aboutPage = AboutPage();
+NewProjectPage newProjectPage = NewProjectPage();
 
 Firestore databaseReference = Firestore.instance;
 
