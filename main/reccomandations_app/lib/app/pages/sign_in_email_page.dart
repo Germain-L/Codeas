@@ -35,11 +35,7 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AnimatedOpacity(
-            duration: Duration(milliseconds: 350),
-            child: Text(errorText, textAlign: TextAlign.center, style: TextStyle(color: Colors.redAccent),),
-            opacity: opacity,
-          ),
+          Text(loginProvider.errorMessage, textAlign: TextAlign.center, style: TextStyle(color: Colors.redAccent),),
           TextFormField(
             decoration: InputDecoration(
               labelText: "Email",
@@ -68,19 +64,24 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
             onFieldSubmitted: (String value) async {
               print(value);
               FocusScope.of(context).unfocus();
-              Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
-
+              await loginProvider.emailSignIn(emailController.text, passwordController.text);
               if (loginProvider.user != null) {
-                navigationProvider.changePage("/home", "Home");
+                navigationProvider.changePage("/home", "Home",);
                 navigationProvider.removePageHistory();
               }
+              // Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
+
+              // if (loginProvider.user != null) {
+              //   navigationProvider.changePage("/home", "Home");
+              //   navigationProvider.removePageHistory();
+              // }
  
-              if (!returnedValue["success"]) {
-                setState(() {
-                  errorText = returnedValue["exception"].message;
-                  opacity = 1;
-                });
-              }
+              // if (!returnedValue["success"]) {
+              //   setState(() {
+              //     errorText = returnedValue["exception"].message;
+              //     opacity = 1;
+              //   });
+              // }
             },
           ),
           Row(
@@ -100,19 +101,20 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
           FlatButton(
             child: Text("Sign in"),
             onPressed: () async {
-              Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
+              loginProvider.emailSignIn(emailController.text, passwordController.text);
+              // Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
 
-              if (loginProvider.user != null) {
-                navigationProvider.changePage("/home", "Home");
-                navigationProvider.removePageHistory();
-              }
+              // if (loginProvider.user != null) {
+              //   navigationProvider.changePage("/home", "Home");
+              //   navigationProvider.removePageHistory();
+              // }
 
-              if (!returnedValue["success"]) {
-                setState(() {
-                  errorText = returnedValue["exception"].message;
-                  opacity = 1;
-                });
-              }
+              // if (!returnedValue["success"]) {
+              //   setState(() {
+              //     errorText = returnedValue["exception"].message;
+              //     opacity = 1;
+              //   });
+              // }
             },
           ),
           AnimatedOpacity(

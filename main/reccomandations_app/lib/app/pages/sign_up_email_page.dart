@@ -138,21 +138,31 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
               ),
               FlatButton(
                 child: Text("Submit"),
-                onPressed: () async  {
-
+                onPressed: () async {
                   if (isValid()) {
-                    Map returnedValue = await loginProvider.emailSignUp(email1.text, password1.text);
-                    if (!returnedValue["success"]) {
-                      setState(() {
-                        errorText = returnedValue["exception"].message;
-                        opacity = 1;
-                      });
-                    } else if (returnedValue["success"]) {
-                      Fluttertoast.showToast(msg: "Accont creation successful");
+                    await loginProvider.emailSignUp(
+                      email1.text,
+                      password1.text,
+                    );
+                    if (loginProvider.user != null) {
                       navigationProvider.changePage(
-                      "/signInEmail", "Sign in with email");
+                        "/home",
+                        "Home",
+                      );
                       navigationProvider.removePageHistory();
                     }
+                    // Map returnedValue = await loginProvider.emailSignUp(email1.text, password1.text);
+                    // if (!returnedValue["success"]) {
+                    //   setState(() {
+                    //     errorText = returnedValue["exception"].message;
+                    //     opacity = 1;
+                    //   });
+                    // } else if (returnedValue["success"]) {
+                    //   Fluttertoast.showToast(msg: "Accont creation successful");
+                    //   navigationProvider.changePage(
+                    //   "/signInEmail", "Sign in with email");
+                    //   navigationProvider.removePageHistory();
+                    // }
                   } else {
                     setState(() {
                       errorText = "Something failed";
