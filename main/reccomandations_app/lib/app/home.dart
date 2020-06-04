@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reccomandations_app/app/pages/about_page.dart';
-import 'package:reccomandations_app/app/pages/account_page.dart';
-import 'package:reccomandations_app/app/pages/home_page.dart';
-import 'package:reccomandations_app/app/pages/new_project_page.dart';
-import 'package:reccomandations_app/app/pages/project_page.dart';
-import 'package:reccomandations_app/app/pages/sign_in_email_page.dart';
-import 'package:reccomandations_app/app/pages/sign_in_methods_page.dart';
-import 'package:reccomandations_app/app/pages/sign_up_email_page.dart';
 import 'package:reccomandations_app/main.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';

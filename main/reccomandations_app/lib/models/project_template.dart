@@ -12,10 +12,10 @@ class Project {
     name = data["name"];
     description = data["description"];
     tags = data["tags"];
-    comments = data["comments"].map<Comment>(
-      (commentFromFirebase) => Comment(
-          name: commentFromFirebase["name"],
-          comment: commentFromFirebase["comment"]),
-    );
+    // comments = data["comments"].map<Comment>(
+    //   (commentFromFirebase) => Comment(
+    //       name: commentFromFirebase["name"],
+    //       comment: commentFromFirebase["comment"]),
+    // );
   }
 }

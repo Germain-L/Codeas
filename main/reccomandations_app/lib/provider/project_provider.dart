@@ -6,10 +6,15 @@ import 'package:reccomandations_app/models/project_template.dart';
 class ProjectProvider with ChangeNotifier {
   Map projectsToDisplay = Map();
 
+  ProjectProvider() {
+    getProjet(["web", "numbers", "algorithms"]);
+  }
+
   void getProjet(List<String> tags) async {
-    QuerySnapshot querySnapshot = await databaseReference.collection("challenges").getDocuments();
+    QuerySnapshot querySnapshot =
+        await databaseReference.collection("challenges").getDocuments();
     List<DocumentSnapshot> projectSnapShotsList = querySnapshot.documents;
-    
+
     Map<String, List<Project>> mapOfProjectsByTags = Map();
 
     for (DocumentSnapshot projectSnapshot in projectSnapShotsList) {
@@ -21,8 +26,6 @@ class ProjectProvider with ChangeNotifier {
         "comments": projectSnapshot.data["comments"],
       });
 
-      
-
       currentProject.tags.forEach((tag) {
         if (!mapOfProjectsByTags.containsKey(tag)) {
           mapOfProjectsByTags[tag] = List<Project>();
@@ -33,7 +36,7 @@ class ProjectProvider with ChangeNotifier {
     }
 
     mapOfProjectsByTags.forEach((key, value) {
-      if(tags.contains(key)){
+      if (tags.contains(key)) {
         projectsToDisplay[key] = mapOfProjectsByTags[key];
       }
     });

@@ -5,7 +5,7 @@ import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/widgets/login_methods_widget.dart';
 
 class AccountPage extends StatelessWidget {
-  const AccountPage();
+
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
