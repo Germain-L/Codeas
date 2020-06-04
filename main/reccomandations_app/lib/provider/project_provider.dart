@@ -6,6 +6,8 @@ import 'package:reccomandations_app/models/project_template.dart';
 class ProjectProvider with ChangeNotifier {
   Map projectsToDisplay = Map();
 
+  Project currentProject;
+
   ProjectProvider() {
     getProjet(["web", "numbers", "algorithms"]);
   }
@@ -22,7 +24,7 @@ class ProjectProvider with ChangeNotifier {
         "name": projectSnapshot.data["name"],
         "difficulty": projectSnapshot.data["difficulty"],
         "description": projectSnapshot.data["description"],
-        "tags": projectSnapshot.data["tags"],
+        "tags": projectSnapshot.data["tags"].map<String>((e) => e.toString()).toList(),
         "comments": projectSnapshot.data["comments"],
       });
 
