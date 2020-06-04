@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
         });
       });
       currentWidget = ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: selectedProjects.length,
         itemBuilder: (BuildContext context, int index) {
           return ProjectCard(

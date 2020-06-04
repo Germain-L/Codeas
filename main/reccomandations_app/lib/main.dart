@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Codeas',
         theme: ThemeData(
+          primaryColor: Colors.white,
           backgroundColor: Color.fromRGBO(255, 255, 255, 0.82),
           canvasColor: Color.fromRGBO(255, 255, 255, 0.82),
           appBarTheme: AppBarTheme(
@@ -65,7 +66,9 @@ class MyApp extends StatelessWidget {
           fontFamily: "OpenSans",
 
           textTheme: TextTheme(
-            bodyText1: TextStyle(fontSize: 20)
+            bodyText1: TextStyle(fontSize: 20),
+            bodyText2: TextStyle(fontSize: 16),
+            headline1: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w500),
           )
         ),
         home: Scaffolding()
