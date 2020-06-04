@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:reccomandations_app/main.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';
+import 'package:reccomandations_app/widgets/floating_action.dart';
 import 'package:reccomandations_app/widgets/navbar.dart';
 
 class Scaffolding extends StatelessWidget {
@@ -16,11 +17,24 @@ class Scaffolding extends StatelessWidget {
     "/about" : aboutPage,
     "/newProject": newProjectPage,
   };
+
+  Widget currentFab(String page) {
+    switch (page) {
+      case "/home":
+        return HomeSortFAB();
+      case "/project":
+        return ProjectCommentFAB();
+      default:
+        return Container();
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
     final navigationProvider = Provider.of<NavigationProvider>(context);
     final loginProvider = Provider.of<LoginProvider>(context);
+
+
     return WillPopScope(
       onWillPop: () async {
         navigationProvider.pop();
@@ -35,6 +49,7 @@ class Scaffolding extends StatelessWidget {
           ),
         ),
         body: pages[navigationProvider.currentPage],
+        floatingActionButton: currentFab(navigationProvider.currentPage),
         bottomNavigationBar: loginProvider.user == null
             ? Container(
               height: 1,
@@ -45,24 +60,3 @@ class Scaffolding extends StatelessWidget {
     );
   }
 }
-
-
-// class Example extends StatelessWidget {
-//   static Map<String, Widget> pages = {
-//     "/account": AccountPage(),
-//     "/home": HomePage(),
-//     "/project": ProjectPage(),
-//     "/signInEmail": SignInEmailPage(),
-//     "/signInMethods": SignInMethodsPage(),
-//     "/signUpEmail": SignUpEmailPage(),
-//     "/about" : AboutPage(),
-//     "/newProject": NewProjectPage(),
-//   };
-//   @override
-//   Widget build(BuildContext context) {
-//     final navProvider = Provider.of<NavigationProvider>(context);
-//     return Scaffold(
-//       body: pages[navProvider.currentPage],
-//     );
-//   }
-// }

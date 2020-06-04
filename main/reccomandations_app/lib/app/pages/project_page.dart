@@ -6,6 +6,7 @@ import 'package:reccomandations_app/provider/project_provider.dart';
 import 'package:reccomandations_app/widgets/project_cards.dart';
 
 class ProjectPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final projectProvider = Provider.of<ProjectProvider>(context);
