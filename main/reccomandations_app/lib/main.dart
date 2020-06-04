@@ -18,11 +18,9 @@ import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';
 import 'package:reccomandations_app/provider/project_provider.dart';
 
-
-
 AccountPage accountPage = AccountPage();
 HomePage homePage = HomePage();
-ProjectPage projectPage =   ProjectPage();
+ProjectPage projectPage = ProjectPage();
 SignInEmailPage signInEmailPage = SignInEmailPage();
 SignInMethodsPage signInMethodsPage = SignInMethodsPage();
 SignUpEmailPage signUpEmailPage = SignUpEmailPage();
@@ -44,15 +42,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => ProjectProvider()),
         ChangeNotifierProvider(
-          create: (context) => ProjectProvider()
+          create: (context) => LoginProvider(
+            firebaseAuth: FirebaseAuth.instance,
+            googleSignin: GoogleSignIn(),
+          ),
         ),
-        ChangeNotifierProvider(
-          create: (context) => LoginProvider(firebaseAuth: FirebaseAuth.instance, googleSignin: GoogleSignIn())
-        ),
-        ChangeNotifierProvider(
-          create: (context) => NavigationProvider()
-        ),
+        ChangeNotifierProvider(create: (context) => NavigationProvider()),
       ],
       child: MaterialApp(
         title: 'Codeas',
@@ -60,18 +57,24 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.white,
           backgroundColor: Color.fromRGBO(255, 255, 255, 0.82),
           canvasColor: Color.fromRGBO(255, 255, 255, 0.82),
-          appBarTheme: AppBarTheme(
-            color: Color.fromRGBO(255, 255, 255, 0.82)
-          ),
+          appBarTheme: AppBarTheme(color: Color.fromRGBO(255, 255, 255, 0.82)),
           fontFamily: "OpenSans",
-
           textTheme: TextTheme(
             bodyText1: TextStyle(fontSize: 20),
             bodyText2: TextStyle(fontSize: 16),
-            headline1: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.w500),
-          )
+            headline2: TextStyle(
+              fontSize: 35,
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+            ),
+            headline1: TextStyle(
+              fontSize: 25,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ),
-        home: Scaffolding()
+        home: Scaffolding(),
       ),
     );
   }

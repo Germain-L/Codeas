@@ -31,8 +31,7 @@ class Scaffolding extends StatelessWidget {
           elevation: 0,
           title: Text(
             navigationProvider.currentPageTitle,
-            style: TextStyle(
-                fontSize: 35, color: Colors.black, fontWeight: FontWeight.w700),
+            style: Theme.of(context).textTheme.headline2
           ),
         ),
         body: pages[navigationProvider.currentPage],
