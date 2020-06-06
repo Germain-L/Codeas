@@ -35,11 +35,23 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(loginProvider.errorMessage, textAlign: TextAlign.center, style: TextStyle(color: Colors.redAccent),),
+          Text(
+            loginProvider.errorMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.redAccent),
+          ),
           TextFormField(
+            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              labelText: "Email",
+              border: InputBorder.none,
               icon: Icon(MdiIcons.email),
+              labelText: "Email",
+              contentPadding: const EdgeInsets.only(
+                left: 15,
+                bottom: 11,
+                top: 11,
+                right: 15,
+              ),
             ),
             autofocus: true,
             autocorrect: true,
@@ -52,9 +64,17 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
             },
           ),
           TextFormField(
+            keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
-              labelText: "Password",
+              border: InputBorder.none,
               icon: Icon(MdiIcons.lock),
+              labelText: "Password",
+              contentPadding: const EdgeInsets.only(
+                left: 15,
+                bottom: 11,
+                top: 11,
+                right: 15,
+              ),
             ),
             autofocus: false,
             autocorrect: false,
@@ -64,9 +84,13 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
             onFieldSubmitted: (String value) async {
               print(value);
               FocusScope.of(context).unfocus();
-              await loginProvider.emailSignIn(emailController.text, passwordController.text);
+              await loginProvider.emailSignIn(
+                  emailController.text, passwordController.text);
               if (loginProvider.user != null) {
-                navigationProvider.changePage("/home", "Home",);
+                navigationProvider.changePage(
+                  "/home",
+                  "Home",
+                );
                 navigationProvider.removePageHistory();
               }
               // Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
@@ -75,7 +99,7 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
               //   navigationProvider.changePage("/home", "Home");
               //   navigationProvider.removePageHistory();
               // }
- 
+
               // if (!returnedValue["success"]) {
               //   setState(() {
               //     errorText = returnedValue["exception"].message;
@@ -96,12 +120,12 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
                 onPressed: () => null,
               ),
             ],
-            
           ),
           FlatButton(
             child: Text("Sign in"),
             onPressed: () async {
-              loginProvider.emailSignIn(emailController.text, passwordController.text);
+              loginProvider.emailSignIn(
+                  emailController.text, passwordController.text);
               // Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
 
               // if (loginProvider.user != null) {

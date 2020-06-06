@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginProvider with ChangeNotifier {
@@ -19,6 +20,17 @@ class LoginProvider with ChangeNotifier {
   LoginProvider({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignin ?? GoogleSignIn();
+
+  void getLastUser() async {
+    Fluttertoast.showToast(msg: "Getting last user");
+    user = await _firebaseAuth.currentUser();
+
+    if (user != null) {
+      Fluttertoast.showToast(msg: "Found a user");
+    }
+
+    notifyListeners();
+  }
 
   // used to show or not show a CircularProgressIndicator
   void changeLoader() {
@@ -74,7 +86,6 @@ class LoginProvider with ChangeNotifier {
         email: email,
         password: password,
       );
-
 
       user = result.user;
       notifyListeners();
