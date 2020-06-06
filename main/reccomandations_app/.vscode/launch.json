@@ -22,5 +22,14 @@
                 "--profile"
             ]
         },
+        {
+            "name": "Flutter release",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "args": [
+                "--release"
+            ]
+        },
     ]
 }
