@@ -14,6 +14,7 @@ import 'package:reccomandations_app/app/pages/project_page.dart';
 import 'package:reccomandations_app/app/pages/sign_in_email_page.dart';
 import 'package:reccomandations_app/app/pages/sign_in_methods_page.dart';
 import 'package:reccomandations_app/app/pages/sign_up_email_page.dart';
+import 'package:reccomandations_app/models/themes.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';
 import 'package:reccomandations_app/provider/project_provider.dart';
@@ -34,10 +35,10 @@ void main() {
     final license = await rootBundle.loadString('OpenSans/LICENSE.txt');
     yield LicenseEntryWithLineBreaks(['OpenSans'], license);
   });
-  runApp(MyApp());
+  runApp(ProviderWidget());
 }
 
-class MyApp extends StatelessWidget {
+class ProviderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -51,31 +52,19 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (context) => NavigationProvider()),
       ],
-      child: MaterialApp(
-        title: 'Codeas',
-        theme: ThemeData(
-          primaryColor: Colors.black,
-          backgroundColor: Color.fromRGBO(255, 255, 255, 0.82),
-          canvasColor: Color.fromRGBO(255, 255, 255, 0.82),
-          appBarTheme: AppBarTheme(color: Color.fromRGBO(255, 255, 255, 0.82)),
-          fontFamily: "OpenSans",
-          textTheme: TextTheme(
-            bodyText1: TextStyle(fontSize: 20),
-            bodyText2: TextStyle(fontSize: 16),
-            headline2: TextStyle(
-              fontSize: 35,
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-            ),
-            headline1: TextStyle(
-              fontSize: 25,
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        home: Scaffolding(),
-      ),
+      child: MyApp(),
+    );
+  }
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final navigationProvider = Provider.of<NavigationProvider>(context);
+    return MaterialApp(
+      title: 'Codeas',
+      theme: navigationProvider.isLightTheme ? lightThemeData : darkThemeData,
+      home: Scaffolding(),
     );
   }
 }

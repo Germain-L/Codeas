@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class NavigationProvider with ChangeNotifier {
   String currentPageTitle = "Sign in methods";
 
+  bool isLightTheme = false;
+
   List<List<String>> previousPages = [];
   String currentPage = "/signInMethods";
 

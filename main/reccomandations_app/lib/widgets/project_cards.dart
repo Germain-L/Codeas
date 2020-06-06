@@ -28,7 +28,7 @@ class ProjectCard extends StatelessWidget {
     final projectProvider = Provider.of<ProjectProvider>(context);
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      color: Theme.of(context).primaryColor,
+      color: Theme.of(context).cardColor,
       child: InkWell(
         onTap: () {
           projectProvider.currentProject = project;
