@@ -6,23 +6,27 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:reccomandations_app/app/home.dart';
+import 'package:reccomandations_app/app/pages/about_page.dart';
+import 'package:reccomandations_app/app/pages/account_page.dart';
+import 'package:reccomandations_app/app/pages/home_page.dart';
+import 'package:reccomandations_app/app/pages/new_project_page.dart';
+import 'package:reccomandations_app/app/pages/project_page.dart';
+import 'package:reccomandations_app/app/pages/sign_in_email_page.dart';
+import 'package:reccomandations_app/app/pages/sign_in_methods_page.dart';
+import 'package:reccomandations_app/app/pages/sign_up_email_page.dart';
+import 'package:reccomandations_app/models/themes.dart';
 import 'package:reccomandations_app/provider/login_provider.dart';
 import 'package:reccomandations_app/provider/navigation_provider.dart';
 import 'package:reccomandations_app/provider/project_provider.dart';
 
-
-// Font styles match:
-// {
-//   FontWeight.w100: 'Thin',
-//   FontWeight.w200: 'ExtraLight',
-//   FontWeight.w300: 'Light',
-//   FontWeight.w400: 'Regular',
-//   FontWeight.w500: 'Medium',
-//   FontWeight.w600: 'SemiBold',
-//   FontWeight.w700: 'Bold',
-//   FontWeight.w800: 'ExtraBold',
-//   FontWeight.w900: 'Black',
-// }
+AccountPage accountPage = AccountPage();
+HomePage homePage = HomePage();
+ProjectPage projectPage = ProjectPage();
+SignInEmailPage signInEmailPage = SignInEmailPage();
+SignInMethodsPage signInMethodsPage = SignInMethodsPage();
+SignUpEmailPage signUpEmailPage = SignUpEmailPage();
+AboutPage aboutPage = AboutPage();
+NewProjectPage newProjectPage = NewProjectPage();
 
 Firestore databaseReference = Firestore.instance;
 
@@ -31,39 +35,36 @@ void main() {
     final license = await rootBundle.loadString('OpenSans/LICENSE.txt');
     yield LicenseEntryWithLineBreaks(['OpenSans'], license);
   });
-  runApp(MyApp());
+  runApp(ProviderWidget());
+}
+
+class ProviderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProjectProvider()),
+        ChangeNotifierProvider(
+          create: (context) => LoginProvider(
+            firebaseAuth: FirebaseAuth.instance,
+            googleSignin: GoogleSignIn(),
+          ),
+        ),
+        ChangeNotifierProvider(create: (context) => NavigationProvider()),
+      ],
+      child: MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ProjectProvider()
-        ),
-        ChangeNotifierProvider(
-          create: (context) => LoginProvider(firebaseAuth: FirebaseAuth.instance, googleSignin: GoogleSignIn())
-        ),
-        ChangeNotifierProvider(
-          create: (context) => NavigationProvider()
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Codeas',
-        theme: ThemeData(
-          canvasColor: Color.fromRGBO(255, 255, 255, 0.82),
-          appBarTheme: AppBarTheme(
-            color: Color.fromRGBO(255, 255, 255, 0.82)
-          ),
-          fontFamily: "OpenSans",
-
-          textTheme: TextTheme(
-            bodyText1: TextStyle(fontSize: 20)
-          )
-        ),
-        home: Scaffolding()
-      ),
+    final navigationProvider = Provider.of<NavigationProvider>(context);
+    return MaterialApp(
+      title: 'Codeas',
+      theme: navigationProvider.isLightTheme ? lightThemeData : darkThemeData,
+      home: Scaffolding(),
     );
   }
 }

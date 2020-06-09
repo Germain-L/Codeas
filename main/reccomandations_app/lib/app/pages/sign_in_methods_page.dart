@@ -16,6 +16,7 @@ class SignInMethodsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(loginProvider.errorMessage, textAlign: TextAlign.center, style: TextStyle(color: Colors.redAccent),),
             LoginMethod(
               text: "Sign in with google",
               icon: Icon(MdiIcons.google),
