@@ -9,7 +9,7 @@ class TagsIndicator extends StatelessWidget {
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey[800], width: 2),
+        border: Border.all(color: Theme.of(context).accentColor, width: 2),
       ),
       child: Center(
         child: Text(tagName),

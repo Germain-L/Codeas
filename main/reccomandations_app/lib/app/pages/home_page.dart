@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reccomandations_app/app/pages/account_page.dart';
-import 'package:reccomandations_app/models/project_template.dart';
-import 'package:reccomandations_app/provider/login_provider.dart';
-import 'package:reccomandations_app/provider/navigation_provider.dart';
-import 'package:reccomandations_app/provider/project_provider.dart';
-import 'package:reccomandations_app/widgets/project_cards.dart';
+
+import '../../models/project_template.dart';
+import '../../provider/navigation_provider.dart';
+import '../../provider/project_provider.dart';
+import '../../widgets/project_cards.dart';
 
 class HomePage extends StatelessWidget {
   @override

@@ -1,4 +1,4 @@
-import 'package:reccomandations_app/models/comment_template.dart';
+import 'comment_template.dart';
 
 class Project {
   String difficulty;

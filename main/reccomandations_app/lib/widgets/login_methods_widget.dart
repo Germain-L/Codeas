@@ -18,7 +18,7 @@ class LoginMethod extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(text, style: Theme.of(context).textTheme.bodyText1,),
+          Text(text, style: Theme.of(context).textTheme.headline3,),
           icon
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reccomandations_app/widgets/tags_indicator.dart';
+
+import 'tags_indicator.dart';
 
 class TagsRow extends StatelessWidget {
   final List<String> tagsToDisplay;

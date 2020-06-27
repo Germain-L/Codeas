@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reccomandations_app/main.dart';
-import 'package:reccomandations_app/provider/login_provider.dart';
-import 'package:reccomandations_app/provider/navigation_provider.dart';
-import 'package:reccomandations_app/widgets/floating_action.dart';
-import 'package:reccomandations_app/widgets/navbar.dart';
+
+import '../provider/login_provider.dart';
+import '../provider/navigation_provider.dart';
+import '../widgets/floating_action.dart';
+import '../widgets/navbar.dart';
+import 'pages/about_page.dart';
+import 'pages/account_page.dart';
+import 'pages/forgot_password_page.dart';
+import 'pages/home_page.dart';
+import 'pages/new_project_page.dart';
+import 'pages/project_page.dart';
+import 'pages/sign_in_email_page.dart';
+import 'pages/sign_in_methods_page.dart';
+import 'pages/sign_up_email_page.dart';
 
 class Scaffolding extends StatelessWidget {
   static Map<String, int> pagesMap = {
@@ -16,17 +25,19 @@ class Scaffolding extends StatelessWidget {
     "/signUpEmail": 5,
     "/about" : 6,
     "/newProject": 7,
+    "/forgotPassword" : 8,
   };
 
-  List<Widget> pagesList = [
-    accountPage,
-    homePage,
-    projectPage,
-    signInEmailPage,
-    signInMethodsPage,
-    signUpEmailPage,
-    aboutPage,
-    newProjectPage,
+  static List<Widget> pagesList = [
+    AccountPage(),
+    HomePage(),
+    ProjectPage(),
+    SignInEmailPage(),
+    SignInMethodsPage(),
+    SignUpEmailPage(),
+    AboutPage(),
+    NewProjectPage(),
+    ForgotPasswordPage()
   ];
 
   Widget currentFab(String page) {
@@ -49,6 +60,7 @@ class Scaffolding extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         navigationProvider.pop();
+        loginProvider.errorMessage = "";
         return false;
       },
       child: Scaffold(
@@ -60,10 +72,8 @@ class Scaffolding extends StatelessWidget {
             style: Theme.of(context).textTheme.headline2
           ),
         ),
-        body: IndexedStack(
-          children: pagesList,
-          index: pagesMap[navigationProvider.currentPage],
-        ),
+        body: pagesList[pagesMap[navigationProvider.currentPage]],
+        
         floatingActionButton: currentFab(navigationProvider.currentPage),
         bottomNavigationBar: loginProvider.user == null
             ? Container(

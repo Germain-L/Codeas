@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reccomandations_app/provider/login_provider.dart';
-import 'package:reccomandations_app/provider/navigation_provider.dart';
+
+import '../../provider/login_provider.dart';
+import '../../provider/navigation_provider.dart';
 
 class SignUpEmailPage extends StatefulWidget {
   @override
@@ -75,7 +75,7 @@ class _SignUpEmailPageState extends State<SignUpEmailPage> {
         labelText: name,
         icon: icon,
       ),
-      autofocus: false,
+      
       autocorrect: autocorrect,
       obscureText: obscure,
       controller: controller,

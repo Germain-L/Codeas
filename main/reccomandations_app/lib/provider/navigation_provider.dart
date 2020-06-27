@@ -1,13 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class NavigationProvider with ChangeNotifier {
   String currentPageTitle = "Sign in methods";
 
-  bool isLightTheme = false;
+  bool isLightTheme = true;
 
   List<List<String>> previousPages = [];
   String currentPage = "/signInMethods";
+
+  void changeTheme(bool newTheme) {
+    isLightTheme = newTheme;
+    notifyListeners();
+  }
 
   void changePage(String newPage, String title) {
     //keep track of previous poges
@@ -20,11 +26,18 @@ class NavigationProvider with ChangeNotifier {
   }
 
   void pop() {
-    currentPage = previousPages.last[0];
-    currentPageTitle = previousPages.last[1];
+    switch (previousPages.isEmpty) {
+      case true:
+        Fluttertoast.showToast(msg: "You've reached the end", );
+        break;
+      case false:
+        currentPage = previousPages.last[0];
+        currentPageTitle = previousPages.last[1];
 
-    previousPages.removeLast();
-    notifyListeners();
+        previousPages.removeLast();
+        notifyListeners();
+        break;
+    }
   }
 
   void removePageHistory() {
