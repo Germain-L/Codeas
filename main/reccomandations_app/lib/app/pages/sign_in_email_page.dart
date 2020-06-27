@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reccomandations_app/provider/login_provider.dart';
-import 'package:reccomandations_app/provider/navigation_provider.dart';
+
+import '../../provider/login_provider.dart';
+import '../../provider/navigation_provider.dart';
 
 class SignInEmailPage extends StatefulWidget {
   @override
@@ -43,8 +44,16 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
+              labelStyle: TextStyle(
+                color: navigationProvider.isLightTheme
+                    ? Colors.black
+                    : Colors.white,
+              ),
               border: InputBorder.none,
-              icon: Icon(MdiIcons.email),
+              icon: Icon(
+                MdiIcons.email,
+                color: Theme.of(context).iconTheme.color,
+              ),
               labelText: "Email",
               contentPadding: const EdgeInsets.only(
                 left: 15,
@@ -53,7 +62,10 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
                 right: 15,
               ),
             ),
-            autofocus: true,
+            style: TextStyle(
+              color:
+                  navigationProvider.isLightTheme ? Colors.black : Colors.white,
+            ),
             autocorrect: true,
             obscureText: false,
             controller: emailController,
@@ -65,9 +77,21 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
           ),
           TextFormField(
             keyboardType: TextInputType.visiblePassword,
+            style: TextStyle(
+              color:
+                  navigationProvider.isLightTheme ? Colors.black : Colors.white,
+            ),
             decoration: InputDecoration(
+              labelStyle: TextStyle(
+                color: navigationProvider.isLightTheme
+                    ? Colors.black
+                    : Colors.white,
+              ),
               border: InputBorder.none,
-              icon: Icon(MdiIcons.lock),
+              icon: Icon(
+                MdiIcons.lock,
+                color: Theme.of(context).iconTheme.color,
+              ),
               labelText: "Password",
               contentPadding: const EdgeInsets.only(
                 left: 15,
@@ -76,7 +100,6 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
                 right: 15,
               ),
             ),
-            autofocus: false,
             autocorrect: false,
             obscureText: true,
             controller: passwordController,
@@ -85,7 +108,9 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
               print(value);
               FocusScope.of(context).unfocus();
               await loginProvider.emailSignIn(
-                  emailController.text, passwordController.text);
+                emailController.text,
+                passwordController.text,
+              );
               if (loginProvider.user != null) {
                 navigationProvider.changePage(
                   "/home",
@@ -93,52 +118,58 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
                 );
                 navigationProvider.removePageHistory();
               }
-              // Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
-
-              // if (loginProvider.user != null) {
-              //   navigationProvider.changePage("/home", "Home");
-              //   navigationProvider.removePageHistory();
-              // }
-
-              // if (!returnedValue["success"]) {
-              //   setState(() {
-              //     errorText = returnedValue["exception"].message;
-              //     opacity = 1;
-              //   });
-              // }
             },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FlatButton(
-                child: Text("Create an account"),
-                onPressed: () => null,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Create an account",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                onPressed: () {
+                  navigationProvider.changePage(
+                    "/signUpEmail",
+                    "Sign up with email",
+                  );
+                },
               ),
+              SizedBox(width: 15,),
               FlatButton(
-                child: Text("Forgot password"),
-                onPressed: () => null,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Forgot password",
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                onPressed: () => {
+                  navigationProvider.changePage(
+                    '/forgotPassword',
+                    'Password reset',
+                  )
+                },
               ),
             ],
           ),
           FlatButton(
-            child: Text("Sign in"),
+            shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+            child: Text(
+              "Sign in",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
             onPressed: () async {
               loginProvider.emailSignIn(
                   emailController.text, passwordController.text);
-              // Map returnedValue = await loginProvider.emailSignIn(emailController.text, passwordController.text);
-
-              // if (loginProvider.user != null) {
-              //   navigationProvider.changePage("/home", "Home");
-              //   navigationProvider.removePageHistory();
-              // }
-
-              // if (!returnedValue["success"]) {
-              //   setState(() {
-              //     errorText = returnedValue["exception"].message;
-              //     opacity = 1;
-              //   });
-              // }
             },
           ),
           AnimatedOpacity(

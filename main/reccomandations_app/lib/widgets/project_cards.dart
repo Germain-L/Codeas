@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reccomandations_app/models/project_template.dart';
-import 'package:reccomandations_app/provider/navigation_provider.dart';
-import 'package:reccomandations_app/provider/project_provider.dart';
-import 'package:reccomandations_app/widgets/tags_row.dart';
+
+import '../models/project_template.dart';
+import '../provider/navigation_provider.dart';
+import '../provider/project_provider.dart';
+import 'tags_row.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
@@ -29,6 +30,7 @@ class ProjectCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       color: Theme.of(context).cardColor,
+      // color: Colors.white,
       child: InkWell(
         onTap: () {
           projectProvider.currentProject = project;
@@ -80,7 +82,7 @@ class ProjectCard extends StatelessWidget {
                             SizedBox(
                               width: 5,
                             ),
-                            Icon(MdiIcons.commentText)
+                            Icon(MdiIcons.commentText, color: Theme.of(context).iconTheme.color,)
                           ],
                         ),
                       ),

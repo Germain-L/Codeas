@@ -5,28 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:reccomandations_app/app/home.dart';
-import 'package:reccomandations_app/app/pages/about_page.dart';
-import 'package:reccomandations_app/app/pages/account_page.dart';
-import 'package:reccomandations_app/app/pages/home_page.dart';
-import 'package:reccomandations_app/app/pages/new_project_page.dart';
-import 'package:reccomandations_app/app/pages/project_page.dart';
-import 'package:reccomandations_app/app/pages/sign_in_email_page.dart';
-import 'package:reccomandations_app/app/pages/sign_in_methods_page.dart';
-import 'package:reccomandations_app/app/pages/sign_up_email_page.dart';
-import 'package:reccomandations_app/models/themes.dart';
-import 'package:reccomandations_app/provider/login_provider.dart';
-import 'package:reccomandations_app/provider/navigation_provider.dart';
-import 'package:reccomandations_app/provider/project_provider.dart';
 
-AccountPage accountPage = AccountPage();
-HomePage homePage = HomePage();
-ProjectPage projectPage = ProjectPage();
-SignInEmailPage signInEmailPage = SignInEmailPage();
-SignInMethodsPage signInMethodsPage = SignInMethodsPage();
-SignUpEmailPage signUpEmailPage = SignUpEmailPage();
-AboutPage aboutPage = AboutPage();
-NewProjectPage newProjectPage = NewProjectPage();
+import 'app/home.dart';
+import 'models/themes.dart';
+import 'provider/login_provider.dart';
+import 'provider/navigation_provider.dart';
+import 'provider/project_provider.dart';
+
 
 Firestore databaseReference = Firestore.instance;
 
@@ -57,10 +42,16 @@ class ProviderWidget extends StatelessWidget {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final navigationProvider = Provider.of<NavigationProvider>(context);
+    print("light theme ? ${navigationProvider.isLightTheme}");
     return MaterialApp(
       title: 'Codeas',
       theme: navigationProvider.isLightTheme ? lightThemeData : darkThemeData,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:reccomandations_app/main.dart';
-import 'package:reccomandations_app/models/project_template.dart';
+
+import '../main.dart';
+import '../models/project_template.dart';
 
 
 
